@@ -13,7 +13,7 @@ api_key = "your_api_key"
 # Configuration section for default values
 DEFAULTS = {
     "input_file": "document.docx",  # Path to the input .docx file
-    "model": "o1-preview",  # OpenAI model to use for translation
+    "model": "gpt-4o",  # OpenAI model to use for translation
     "chunk_size_safety_margin": 0.9,  # Safety margin for chunk size calculation
     "api_key": os.getenv("OPENAI_API_KEY", api_key),  # API key for OpenAI
     "source_language": "English",  # Default source language
