@@ -1,7 +1,7 @@
 
-# `ai_linugist` : Translate large, complex text documents with OpenAI LLM's
+# `ai_linguist` : Translate large, complex text documents with OpenAI LLM's
 
-`ai_linugist` translates a `.docx` word file using OpenAI's API. This script unzips the `.docx` file into its elements, examines `document.xml`, which contains the document text paragraphs, temporarily replaces these text strings with unique identifiers, creates a `.json` file with said text strings and identifiers, translates the text, and reconstructs the document with the translated content. 
+`ai_linguist` translates a `.docx` word file using OpenAI's API. This script unzips the `.docx` file into its elements, examines `document.xml`, which contains the document text paragraphs, temporarily replaces these text strings with unique identifiers, creates a `.json` file with said text strings and identifiers, translates the text, and reconstructs the document with the translated content. 
 
 - Completely preserves document formatting (e.g., images, fonts, ... ).
 - Can translate documents of any length.
