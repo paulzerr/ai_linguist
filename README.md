@@ -1,13 +1,17 @@
 
-# Translate word documents with OpenAI
+# `ai_linugist` : Translate large, complex text documents with OpenAI LLM's
 
-Translates a `.docx` word file using OpenAI's API. It temporarily unzips the `.docx` file into its elements, examines `document.xml`, which contains the document text, temporarily replaces these text strings with unique identifiers, creates a `.json` file with text strings and identifiers, translates the text, and reconstructs the document with the translated content. 
+`ai_linugist` translates a `.docx` word file using OpenAI's API. This script unzips the `.docx` file into its elements, examines `document.xml`, which contains the document text paragraphs, temporarily replaces these text strings with unique identifiers, creates a `.json` file with said text strings and identifiers, translates the text, and reconstructs the document with the translated content. 
 
-This script has been tested on Kubuntu Linux 24 with Python 3.12 and OpenAI Python library version 1.56.2, but should run on other systems.
+- Completely preserves document formatting (e.g., images, fonts, ... ).
+- Can translate documents of any length.
+- Efficiently translates as much text per prompt as possible.
+
+This script has been tested on Kubuntu Linux 24.04 with Python 3.12 and OpenAI Python library 1.56.2, but should run on other systems.
 
 ## Disclaimer
 
-This script comes with zero guarantees for correctness and you should not trust the translation blindly, or at all. Verify with human eyes.
+This software comes with zero guarantees for correctness or otherwise, and you should not trust the translation blindly, or at all. Verify with human eyes. 
 
 
 ## Installation
@@ -15,7 +19,7 @@ This script comes with zero guarantees for correctness and you should not trust 
 Download the repository:
 
 ```bash
-git clone https://github.com/paulzerr/translate_openai
+git clone https://github.com/paulzerr/ai_linguistai
 ```
 
 Install Python 3 and the required openai package:
@@ -32,14 +36,14 @@ See section below for how to export your API key as environment variable (recomm
 
 ### Option 1: CLI
 
-Ensure the API key is available as environment variable (see below) and run the script from a command line interface:
+Ensure the API key is available as an environment variable (see below) and run the script from a command line interface:
 
-**Example**:
+**Example**
 ```bash
-python translate_openai.py path/to/your/document.docx --model gpt-4o --chunk_size 400000 --source_language English --target_language French
+python ai_linguist.py path/to/your/document.docx --model gpt-4o --chunk_size 400000 --source_language English --target_language French
 ```
 
-- `<input_docx>`: Path to the input `.docx` file. By default, the script looks for `document.docx` in the same folder as this script.
+- `<input_docx>`: Path to the input `.docx` file. By default, the script looks for `document.docx` in the current working directory.
 - `--model`: OpenAI model for translation (e.g.,`o1-preview`, `gpt-4o`). Default is `GPT-4o`. `o1-preview` is suggested for best translation performance.
 - `--chunk_size`: Maximum chunk size for translation segment (in characters). This determines the maximum size per segment of the document that will be uploaded for translation. This is optional, as a safe chunk limit is determined automatically depending on the model.
 - `--source_language`: The language of the input document (e.g., `English`, `Spanish`, `German`). Default is `English`.
@@ -51,13 +55,13 @@ python translate_openai.py path/to/your/document.docx --model gpt-4o --chunk_siz
 To run the script directly without input parameters, modify the `DEFAULTS` section at the top of the script, then run:
 
 ```bash
-python translate_openai.py
+python ai_linguist.py
 ```
 
 
-## Output
+### Output
 
-A translated `.docx` file saved in the same directory as the input file with `_translated` appended to the name.
+A translated `.docx` file saved in the same directory as the input file with `_translated` appended to the name. The formatting of the original document should be preserved.
 
 
 ## License
@@ -71,17 +75,23 @@ This project is licensed under the GNU General Public License v3.0. See the `LIC
 ## Make API key available as environment variable (safe option)
 
 ### Linux/MacOS
-1. Open your terminal and edit your shell configuration file (`~/.bashrc` or `~/.zshrc`):
-   ```bash
-   export OPENAI_API_KEY="your_api_key_here"
-   ```
-2. Apply the changes:
-   ```bash
-   source ~/.bashrc  # or source ~/.zshrc
-   ```
+Open your terminal and edit the shell configuration file `~/.bashrc` or `~/.zshrc` 
+
+Add the following line and apply the changes:
+```bash
+export OPENAI_API_KEY="your_api_key"
+
+source ~/.bashrc
+```
 
 ### Windows
-1. Open Command Prompt and run:
-   ```cmd
-   setx OPENAI_API_KEY "your_api_key_here"
-   ```
+Open command window (cmd) and run:
+```cmd
+setx OPENAI_API_KEY "your_api_key"
+```
+
+
+## TODO:
+
+- make non-openai models available
+- allow any text document to be translated
